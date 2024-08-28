@@ -45,4 +45,59 @@ Los errores que generaban eran el retraso ya que trabajaban separadamente los eq
 En resumen entiendo el DevOps como una nueva perspectiva de ver las cosas al momento de trabajar, una nueva mentalidad donde se predomina la particiación e integración de los equipos para agilizar la entrega del software con sus respectivas actualizaciones.  
   
 * **Pregunta 5: Según el texto, ¿cómo contribuyen los equipos autónomos y multifuncionales a una implementación exitosa de DevOps?**  
-Al tener un equipo multifuncional se reduce el tiempo de pasar de la idea al producto, ya que en un mismo equipo hay miembros con diferentes habilidades pertinentes al desarrollo. Además como los equipos son uno, no hay la necesidad de esperar la aprobación de otro departamente, esto cultiva una cultura de propieadad y responsabilidad.
+Al tener un equipo multifuncional se reduce el tiempo de pasar de la idea al producto, ya que en un mismo equipo hay miembros con diferentes habilidades pertinentes al desarrollo. Además como los equipos son uno, no hay la necesidad de esperar la aprobación de otro departamente, esto cultiva una cultura de propieadad y responsabilidad.   
+
+
+
+
+# Poniendo en práctica CI/CD
+## 1. Configuración del entorno:  
+### 1.1 Inicializamos el proyecto de Node.js:  
+Creamos un archivo donde realizaremos el trabajo y sobre ella creamos un package.json
+![](img/1.1.png)  
+  
+### 1.2 Instalar las dependencias necesarias:  
+En este caso las dependencias que necesitaremos serán la de express y jest para los tests  
+![](img/1.2.png) 
+  
+Al hacer esto, dichas dependencias estarán registradas en el package.json creado con sus versiones respectivas (línea 12 y 14)
+![](img/1.2.1.png)  
+
+También necesitaremos la dependencia de `supertest`, para ello también debemos poner:
+![](img/1.3.1.png)
+  
+### 1.3 Crea la estructura del proyecto:  
+Creamos la clásica estructura de proyecto en donde tenemos un directorio de src que contendrá el código del proyecto y otro de tests, para hacerlo usamos los comandos:  
+```  
+mkdir src tests   
+touch src/app.js tests/app.test.js
+```  
+El resultado sería tal que asi:  
+![](img/1.3.png)  
+
+  
+### 1.4 Implementa la API REST en src/app.js  
+En app.js basicamente defineremos una ruta para manejar solicitud HTTP, en este caso GET a la url raíz y como respuesta simplemente mandaremos un Hello World como se muestra en la linea 6, además definiremos un puerto donde la aplicación escuchará conexiones, en este caso es el puerto 3000
+![](img/1.4.png)  
+
+  
+### 1.5 Escribe un test básico en tests/app.test.js:  
+El test basicamente verifica si luego de hacer una solicitud get a nuestra esta nos devuelve un código http 200 es decir todo salio OK, y si en efecto se esta mostrando en pantalla lo que queremos mostrar, en este caso "Hello Wolrd!"  
+![](img/1.5.png)  
+  
+### 1.6 Configura el script de test en package.json  
+Este script es para especificar que los test se harán con jest luego de ejecutar el comando npm run test.  
+Además ponemos el script dev para ejecutar el app.js y ver desde localhost:3000 el Hello world!
+![](img/1.6.png)  
+
+Si todo ha sido hecho de manera correcta entonces al ejecutar nuestra app.js debe salirnos algo asi:  
+  
+En el puerto 3000:  
+![](img/1.7.png)
+
+  
+Y al ejecutar el test debería estar todo okey:  
+![](img/1.7.2.png)
+  
+## 2. Pipeline CI/CD  
+### Parte 1: Configura integración continua (CI) con GitHub Actions
