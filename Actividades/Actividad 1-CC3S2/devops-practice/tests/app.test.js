@@ -8,9 +8,10 @@ describe('GET /', () => {
         server = app.listen(0)
     })
 
-    afterAll(async () => {
-        await new Promise(resolve => server.close(resolve));
+    afterAll(() => {
+        server.close()
     })
+
 
     it("should return Hello World!", async () => {
         const res = await request(app).get("/");
