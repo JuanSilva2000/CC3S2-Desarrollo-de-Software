@@ -100,7 +100,7 @@ Y al ejecutar el test debería estar todo okey:
 ![](img/1.7.2.png)
   
 ## 2. Pipeline CI/CD  
-### Parte 1: Configura integración continua (CI) con GitHub Actions 
+## Parte 1: Configura integración continua (CI) con GitHub Actions 
 ### 2.1.1 Creamos la estrucutra para GitHub : 
 Usamos los siguientes comandos en la terminal:  
 ```
@@ -140,4 +140,16 @@ Usamos para ello un git push y en la seccion de github de Action debería aparec
   
 ![](img/2.1.3.png)
   
-Los procesos se ejecutan pero en el paso de correr test se queda estancado ahí, esto es normal porque hay una operacion asincrona en el test que no ha sido detenida, pero como se ve en la imagen la operacion de test se ha ejecutado y ha pasado.
+Los procesos se ejecutan pero en el paso de correr test se queda estancado ahí, esto es normal porque hay una operacion asincrona en el test que no ha sido detenida, pero, como se ve en la imagen la operacion de test se ha ejecutado y ha pasado, y eso es una buena señal.  
+  
+Para corregir ese detalle, hay que añadir una códicional `requiere.main === module` (ver linea 11), esta códicional verifica si el archivo que contiene este código de app.js está siendo ejecutada directamente desde la línea de comandos o si está siendo importado por otro módulo, por lo tanto cuando en importando en app.test (el app.js) dicha condicional no se cumpliría evitando asi que el servidor se incie si es importando desde otro modulo.   
+![](img/2.1.3.1.png)  
+  
+Y por ultimo, en el test, como no se inicia en ningún puerto el server, con ayuda de un `beforeAll()` escuchamos el server en algún puerto libre, pare eso ponemos el 0, y luego lo cerramos después de ejecutar los test con un `afterAll()`   
+
+![](img/2.1.3.2.png)  
+ 
+De esta manera al ejecutar el test el server no se queda abierto, entonces cuando volvamos a hacer un push a nuestra rama main y realize las acciones definidas en el archivo yaml deberia completarse todo satisfactoriamente:  
+![](img/2.1.3.3.png)  
+  
+## Parte 2: Configura entrega continua (CD) con Docker  
