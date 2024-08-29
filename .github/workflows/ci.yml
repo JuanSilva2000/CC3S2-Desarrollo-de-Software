@@ -24,8 +24,6 @@ jobs:
 
     - name: Install dependencies
       run: npm install
-      working-directory: 'Actividades/Actividad 1-CC3S2/devops-practice/'
 
     - name: Run tests
       run: npm test
-      working-directory: 'Actividades/Actividad 1-CC3S2/devops-practice/'

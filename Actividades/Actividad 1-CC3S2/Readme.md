@@ -129,9 +129,15 @@ build (linea 10 y 11).
     
 - El paso de Set up Node.js ejecuta otra accion predefinida el cual instala Node en la máquina virtual en este caso se especifica la version que es la 14 (linea 20).  
   
-- El paso de de Install dependencies es explícito, y se logra ejecutando un npm install para ejecutar las dependencias del package.json (línea 23).  
+- El siguiente paso de Change to project directory es para cambiar de directorio en donde se encuentra el package.json pues es ahí donde instalaremos las depenendicas (paso siguiente), para ello simplemente corremos el comando básico de linux `cd`.
   
-- Y el paso de Run tests también estpa explícito, simplemete se corren los test con npm test.  
+- El paso de de Install dependencies es explícito, y se logra ejecutando un npm install para ejecutar las dependencias del package.json (línea 26).  
+  
+- Y el paso de Run tests también estpa explícito, simplemete se corren los test con npm test. (linea 29)
   
 ### 2.1.3 Sube el código a GitHub: 
-Usamos para ello un git push 
+Usamos para ello un git push y en la seccion de github de Action debería aparecer el flujo de trabajo que se escribió en el ci.yml  
+  
+![](img/2.1.3.png)
+  
+Los procesos se ejecutan pero en el paso de correr test se queda estancado ahí, esto es normal porque hay una operacion asincrona en el test que no ha sido detenida, pero como se ve en la imagen la operacion de test se ha ejecutado y ha pasado.
