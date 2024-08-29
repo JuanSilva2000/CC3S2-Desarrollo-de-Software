@@ -100,4 +100,37 @@ Y al ejecutar el test debería estar todo okey:
 ![](img/1.7.2.png)
   
 ## 2. Pipeline CI/CD  
-### Parte 1: Configura integración continua (CI) con GitHub Actions
+### Parte 1: Configura integración continua (CI) con GitHub Actions 
+### 2.1.1 Creamos la estrucutra para GitHub : 
+Usamos los siguientes comandos en la terminal:  
+```
+mkdir -p .github/workflows 
+touch .github/workflows/ci.yml
+```  
+  
+En el explorer debería verse algo asi:  
+![](img/2.1.1.png)  
+  
+### 2.1.2 Define el flujo de trabajo en .github/workflows/ci.yml 
+![](img/2.1.2.png)  
+- Analicemos, el nombre del flujo de trabajo es CI Pipeline (linea 1).  
+
+- En la linea 2 se define los eventos que se ejecutarán en el flujo, en este caso se ejecutarán cuando se hace un push o un pull_request a la rama main, eso lo podemos ver desde la línea 4 a la línea 8.  
+
+- Jobs se define los trabajos que se realizarán, en este caso el trabajo se llama 
+build (linea 10 y 11).  
+
+- `runs-on: ubuntu-latest` inidica que este trabajo (de build) se ejecutará en una maquina virtual con ubuntu.  
+  
+- `steps` como su nombre le indica define los pasos que se ejecutarán como parte del trabajo, en este caso son 4 pasos, cada uno tiene un nombre definido en `name`.  
+  
+- El paso de Check out code se usa una acción predefinida de Github (linea 15) aqui se clona el repositorio en la máquina virtual donde se ejecutará el trabajo. 
+  
+    
+- El paso de Set up Node.js ejecuta otra accion predefinida el cual instala Node en la máquina virtual en este caso se especifica la version que es la 14 (linea 20).  
+  
+- El paso de de Install dependencies es explícito, y se logra ejecutando un npm install para ejecutar las dependencias del package.json (línea 23).  
+  
+- Y el paso de Run tests también estpa explícito, simplemete se corren los test con npm test.  
+  
+### 2.1.3 Sube el código a GitHub:  
