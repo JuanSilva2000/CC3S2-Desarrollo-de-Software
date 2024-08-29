@@ -27,3 +27,4 @@ jobs:
 
     - name: Run tests
       run: npm test
+      working-directory: 'Actividades/Actividad 1-CC3S2/devops-practice/'

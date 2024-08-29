@@ -133,7 +133,7 @@ build (linea 10 y 11).
   
 - El paso de de Install dependencies es explícito, y se logra ejecutando un npm install para ejecutar las dependencias del package.json (línea 26).  
   
-- Y el paso de Run tests también estpa explícito, simplemete se corren los test con npm test. (linea 29)
+- Y el paso de Run tests también estpa explícito, simplemete se corren los test con npm test. (linea 29), y el working-directory es para asegurarse que el npm test se ejecuta en el directorio correcto (sin eso me salía error en este paso).
   
 ### 2.1.3 Sube el código a GitHub: 
 Usamos para ello un git push y en la seccion de github de Action debería aparecer el flujo de trabajo que se escribió en el ci.yml  
