@@ -152,4 +152,28 @@ Y por ultimo, en el test, como no se inicia en ningún puerto el server, con ayu
 De esta manera al ejecutar el test el server no se queda abierto, entonces cuando volvamos a hacer un push a nuestra rama main y realize las acciones definidas en el archivo yaml deberia completarse todo satisfactoriamente:  
 ![](img/2.1.3.3.png)  
   
-## Parte 2: Configura entrega continua (CD) con Docker  
+## Parte 2: Configura entrega continua (CD) con Docker    
+  
+### 1. Crea un archivo Docker para contenerizar la aplicación  
+![](img/2.2.1.png)  
+  
+### 2. Construye la imagen de Docker  
+Con ese dokerfile creamos nuestra imágen devops-practice usando el comando: 
+```
+    docker build -t devops-practice .
+```   
+Debería salir algo como esto:
+![](img/2.2.2.png)  
+
+Si todo salió bien entonces debería aparecer en el listado de imagenes la imágen de devops-practice :
+![](img/images%20created.png)  
+  
+### 3. Corre el contenedor localmente  
+Corremos la imágen, es decir ejecutamos un contenedor con esta imágen y debería salir el mensaje que se muestra en pantalla y esto es porque en la última linea del dockerfile indicamos que ejecutara el app con `node src/app.js`
+![](img/contenedor-running.png)  
+  
+Como se está corriendo el app con el contenedor entonces desde el puerto indicado 3000 debería mostrarse el Hello Wolrd!. 
+![](img/result-container.png)  
+  
+### 4. Automatiza el despliegue con GitHub Actions
+![](img/2.2.3.png)
