@@ -5,13 +5,12 @@ describe('GET /', () => {
     let server;
 
     beforeAll(() => {
-        server = app.listen(3000)
+        server = app.listen(0)
     })
 
-    afterAll(() => {
-        server.close()
+    afterAll(async () => {
+        await new Promise(resolve => server.close(resolve));
     })
-
 
     it("should return Hello World!", async () => {
         const res = await request(app).get("/");
