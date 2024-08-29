@@ -133,4 +133,5 @@ build (linea 10 y 11).
   
 - Y el paso de Run tests también estpa explícito, simplemete se corren los test con npm test.  
   
-### 2.1.3 Sube el código a GitHub:  
+### 2.1.3 Sube el código a GitHub: 
+Usamos para ello un git push 
