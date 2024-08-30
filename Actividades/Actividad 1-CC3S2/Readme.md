@@ -172,8 +172,38 @@ Si todo salió bien entonces debería aparecer en el listado de imagenes la imá
 Corremos la imágen, es decir ejecutamos un contenedor con esta imágen y debería salir el mensaje que se muestra en pantalla y esto es porque en la última linea del dockerfile indicamos que ejecutara el app con `node src/app.js`
 ![](img/contenedor-running.png)  
   
-Como se está corriendo el app con el contenedor entonces desde el puerto indicado 3000 debería mostrarse el Hello Wolrd!. 
+Como se está corriendo el app con el contenedor entonces desde el puerto indicado 3000 debería mostrarse el Hello Wolrd!.  
 ![](img/result-container.png)  
   
 ### 4. Automatiza el despliegue con GitHub Actions
-![](img/2.2.3.png)
+![](img/2.2.3.png)  
+Lo que se hizo es añadir dos pasos mas, uno para ejecutar la imágen y crear el contenedor en el paso Build Docker image (linea 65) y otro paso para correr dicho contenedor creado en el paso Run Docker Container (linea 69).  
+  
+
+Luego de actualizar nuesto YAML, al momento de pushear debería ejecutarse el flujo de trabajo programado, y si todo salió bien debería salir como la imágen:  
+![](img/result-cd.png)  
+  
+### 5. Automatiza la configuración y gestión del entorno local usando Docker Compose  
+El archivo de docker-compose debe ser algo aso:
+![](img/2.3.1.png)  
+  
+- `version` del compose es 3.8.  
+- `services` en este contexto indica los contenedores (o servicios) que serpan ejecutados, en este caso el único servicio es `app`.  
+- `build .` es para basicamente usar el dockerfile y contruir el contenedor, aquí lo estamos especificando para que se haga de manera automática.  
+- `ports: 3000:3000` Aqui se define el puerto, el primero 300 es el puerto de la máquina host y el segundo es el puerto expuesto en el contenedor, es decir cuando accedamos a localhost:3000, nos estaremos comunicando con el puerto 3000 del contenedor.  
+- `enviroment` es simplemente para definir las variables de entorno, es este caso solo es una variable `NODE_ENV = production`.  
+  
+Corremos la aplicacion con este docker-compose creado con el comando:  
+```
+docker-compose up --build -d
+```  
+
+Si todo salió bien entonces debería salir este mensaje en la terminal, que el contenedor se ha iniciado
+![](img/compose%20result%201.png)
+  
+Y además al acceder al puerto de 3000 en el navegador debería salir el Hello world! que hicimos  
+  
+![](img/compose%20result%202.png)  
+  
+## Parte 3: Evalua la experiencia  
+Con este ejemplo práctico hemos visto como la automatización del CI/CD puede ser de mucha ayuda para satisfacer la demanada de los clientes que solicitan actualizaciones o mejoras continuas, todo está definido y/o automatizado de tal forma qué el desarrollador puede rápidamente integrar su código de su rama a la rama principal(como se vió el la sección de CI) de manera ágil pasando todos los test que se de menera autómatica y como estos se puedes desplegar en un contenedor de manera automatica también (sección CD).
