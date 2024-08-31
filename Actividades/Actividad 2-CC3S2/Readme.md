@@ -67,4 +67,75 @@ Si sale como en la imágen de abajo significa que todas las dependencias están 
 ### 2. Automatiza el análisis de seguridad en GitHub Actions  
 Para ello se crea un archivo yml en nuestro workflow .github/workflows/ci.yml   
 ![](img/2.2.2.png)  
-Lo que hace esto es definir unas acciones que se hará al momento de hacer push o pull request a la rama main, dichas acciones son configurar e instalar todas las dependencias necesarias para node, ejecutar los test y escanear las dependencias buscando si hay alguna vulnerabilidad, como vemos desde un inicio estamos viendo la seguridad, aspecto a tener en cuenta en DevSecOps pues hay un desplazamiento a la izquierda en la seguridad.
+Lo que hace esto es definir unas acciones que se hará al momento de hacer push o pull request a la rama main, dichas acciones son configurar e instalar todas las dependencias necesarias para node, ejecutar los test y escanear las dependencias buscando si hay alguna vulnerabilidad, como vemos desde un inicio estamos viendo la seguridad, aspecto a tener en cuenta en DevSecOps pues hay un desplazamiento a la izquierda en la seguridad.   
+  
+Si todo a salido bien entonces en el GitHub Action:  
+![](img/2.2.3.png)  
+  
+## 3. Implementación de Infraestructura como códifo (IaC)  
+Usaremos docker para contenerizar la aplicación, para ello creamos un Dockerfile y ponemos las configuraciones que tendrá nuestro contenedor como la configuracion e instalacion de node.  
+![](img/2.3.1.png).  
+  
+Con el dockerfile creado ya podemos buildearlo y obtener nuestra imagen para después correrlo y crear nuestro contenedor  
+Para construir la imágen usando el comando de la imágen:  
+![](img/docker%20build.png)
+    
+Luego corremos en contenedor la app:  
+![](img/run%20docker.png)  
+  
+Y en teoría deberia aparecer en el puerto definido el saludo:  
+![](img/puerto-docker.png)  
+  
+### 3.1. Automatizar la gestión de contenedores usando Docker Compose  
+Para ello nos ayudaremos con docker compose y codearemos el buildeo para que se haga de manera automática  
+  
+![](img/docker%20compose.png)  
+  
+Corremos la aplicacion con docker compose usando el siguiente comando:  
+```
+    docker-compose up --build -d
+```  
+![](img/compose-execute.png)  
+  
+como se en la imágen de arriba se creo dicho contenedor de devops-practice y se está ejecutando en el puerto 3000, esto indica que el compose corrió bien  
+
+## 4. Implementación de Observabilidad  
+### 1. Creamos un archivo prometheus para configuralo
+Con prometheus podremos monitorear nuestra app, para ello creamos un yml tal que asi: 
+![](img/prometheus.png)  
+- `scrape_interval: 15s` inidica que cada 15seg prometheus recopilará las métricas.  
+  
+- `job_name: node-app` especifica el nombre para este trabajo de recolción.  
+  
+- `targets: [localhost:3000]` inidica la direccion y el puerto donde está nuestra aplicacion y por lo tanto a ella misma (la app) recoletar dichas métrica.
+  
+Nota: si no tienes instalado prometeus, debes instalarlo con el siguiente comando:  
+```  
+    sudo apt-get install prometheus
+```  
+  
+Luego para ejecutar prometheus con el yaml creado ponemos en la terminalel siguiente comando:  
+```
+    sudo prometheus --config.file=prometheus.yml
+```    
+<img src="img/ejecucion prometheus.png" with="800">  
+
+Si vemos detenidamente el mensaje en la terminal hay una linea que dice:  
+`ts=2024-08-31T02:46:41.798Z caller=web.go:504 level=info component=web msg="Start listening for connections" address=0.0.0.0:9090`  
+  
+Esto significa que el servidor web de Prometheus está activo y puede ser accedido a través del navegador web en el puerto 9090.
+  
+Al acceder a ese puerto nos aparece en un input la opción de escoger una métrica y ver su gŕafica, en la imágen de abajo podemos ver la métrica `node_disk_read_bytes_total` que mide el número total de bytes leídos desde el disco del sistea desde quese inició el servidor  
+![](img/prometheus-puerto.png)  
+  
+### 2. Configurar Grafana utiilzando docker-compone  
+![](img/grafana-compose.png)  
+  
+Lo que hacemos es añadir dos servicios mas, una de ellas es prometheus usando la imágen oficial de esta herramienta que Docker tiene (líena 11) y luego añadimos al contenedor el archivo yml de nuestra maquina local y lo expondremos desde el puerto 9090.  
+  
+El segundo servicio es de grafana espuesta en el puerto 3001 utilizando también la imágen oficial de grafana de docker.  
+  
+Para ejecutar todos los sevicios definidos se usa el siguiente comando:  
+```
+    docker-compose up
+```
