@@ -77,7 +77,8 @@ El resultado sería tal que asi:
 
   
 ### 1.4 Implementa la API REST en src/app.js  
-En app.js basicamente defineremos una ruta para manejar solicitud HTTP, en este caso GET a la url raíz y como respuesta simplemente mandaremos un Hello World como se muestra en la linea 6, además definiremos un puerto donde la aplicación escuchará conexiones, en este caso es el puerto 3000
+En app.js basicamente defineremos una ruta para manejar solicitud HTTP, en este caso GET a la url raíz y como respuesta simplemente mandaremos un Hello World como se muestra en la linea 6, además definiremos un puerto donde la aplicación escuchará conexiones, en este caso es el puerto 3000.  
+
 ![](img/1.4.png)  
 
   
@@ -184,7 +185,8 @@ Luego de actualizar nuesto YAML, al momento de pushear debería ejecutarse el fl
 ![](img/result-cd.png)  
   
 ### 5. Automatiza la configuración y gestión del entorno local usando Docker Compose  
-El archivo de docker-compose debe ser algo aso:
+El archivo de docker-compose debe ser algo asi:  
+
 ![](img/2.3.1.png)  
   
 - `version` del compose es 3.8.  

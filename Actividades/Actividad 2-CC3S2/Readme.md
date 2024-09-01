@@ -49,7 +49,8 @@ Con esta configuración cada vez que pongamos `npm run dev` y `npm run test` se 
 
 ![](img/2.6.png)  
  
-Si todo ha salido bien entonces al abrir el puerto desde nuestro navegador con algun parámetro por ejemplo `http://localhost:3000/Silva` debería salir algo como esto:
+Si todo ha salido bien entonces al abrir el puerto desde nuestro navegador con algun parámetro por ejemplo `http://localhost:3000/Silva` debería salir algo como esto:  
+
 ![](img/2.6.1.png)  
     
 Y al ejecutar los test debería pasar satisfactoriamente:  
