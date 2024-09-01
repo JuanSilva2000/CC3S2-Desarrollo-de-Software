@@ -25,4 +25,7 @@ Si queremos pasarlo a uns estado de rastreado podemos usar una opción de git ad
 ![](img/3.2.png)  
   
 ## 4. git commit: Registra cambios  
-Con el git commit registramos los cambios que previamente se preparamos con el git add, el commit viene con una bandera -m es para añadir un mensaje corto y descriptivo que especifique los cambios hechos
+Con el git commit registramos los cambios que previamente se preparamos con el git add, el commit viene con una bandera -m es para añadir un mensaje corto y descriptivo que especifique los cambios hechos:  
+![](img/4.1.png).  
+  
+Veamos si en efecto los cambios han sido incorporados con el git status
