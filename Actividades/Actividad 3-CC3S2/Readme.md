@@ -65,3 +65,11 @@ Básicamente estamos añadiendo una personalizacion:
 - `%s`: Muestra el mensaje del commit.  
   
 
+### Intentemos el comando git log en el siguiente ejercicio:  
+  
+Creamos un archivo CONTRIBUTING.md y lo rastreamos y resgistramos en un commit:  
+![](img/A1.png)  
+![](img/A2.png) 
+  
+Luego creamos un archivo `main.py` poniendo un simple hello world  
+![](img/A3.png)
