@@ -32,7 +32,7 @@ Veamos si en efecto los cambios han sido incorporados con el git status
 ![](img/4.2.png)  
   
 ## 5. git log: Recorrer el árbol de commits  
-Este comando myestra una lista de commits realizados en orden cronólico inverso, es decir el commit más reciente se muestra primero  
+Este comando muestra una lista de commits realizados en orden cronólico inverso, es decir el commit más reciente se muestra primero  
 ![](img/5.1.png)  
   
 Además del comando básico git log, hay numerosas opciones que te permiten adaptar la salida a tus necesidades:
@@ -72,4 +72,12 @@ Creamos un archivo CONTRIBUTING.md y lo rastreamos y resgistramos en un commit:
 ![](img/A2.png) 
   
 Luego creamos un archivo `main.py` poniendo un simple hello world  
-![](img/A3.png)
+![](img/A3.png)  
+  
+Y lo rastreamos y comiteamos:  
+![](img/A4.png)  
+  
+Y luego confirmemos en el log que está correctamente registrado:  
+  `g$ git log --oneline`
+
+![](img/A5.png)
