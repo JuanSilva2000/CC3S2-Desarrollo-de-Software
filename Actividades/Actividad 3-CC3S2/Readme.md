@@ -80,4 +80,27 @@ Y lo rastreamos y comiteamos:
 Y luego confirmemos en el log que está correctamente registrado:  
   `g$ git log --oneline`
 
-![](img/A5.png)
+![](img/A5.png)  
+  
+## 6. git branch: Entendiendo los conceptos básicos de Git branch  
+  
+Con el el comando `git branch` podremos listar todas las ramas de nuestro repositorio.  
+En nuestro caso solo hay una rama (la main)  
+  
+![](img/6.1.png)  
+  
+Creamos una nueva rama con:  
+```
+$ git branch featyre/new-feature
+``` 
+
+![](img/6.2.png)  
+  
+![](img/6.3.png)  
+  
+## 7. git checkout/git switch: Cambiar entre branches
+Con el siguiente comando podremos cambiar de rama:  
+```
+  $ git checkout feature/new-feature
+```  
+![](img/6.4.png)
