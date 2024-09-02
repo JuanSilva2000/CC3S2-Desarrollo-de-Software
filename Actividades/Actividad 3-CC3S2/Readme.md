@@ -28,4 +28,40 @@ Si queremos pasarlo a uns estado de rastreado podemos usar una opción de git ad
 Con el git commit registramos los cambios que previamente se preparamos con el git add, el commit viene con una bandera -m es para añadir un mensaje corto y descriptivo que especifique los cambios hechos:  
 ![](img/4.1.png).  
   
-Veamos si en efecto los cambios han sido incorporados con el git status
+Veamos si en efecto los cambios han sido incorporados con el git status  
+![](img/4.2.png)  
+  
+## 5. git log: Recorrer el árbol de commits  
+Este comando myestra una lista de commits realizados en orden cronólico inverso, es decir el commit más reciente se muestra primero  
+![](img/5.1.png)  
+  
+Además del comando básico git log, hay numerosas opciones que te permiten adaptar la salida a tus necesidades:
+- `git log -p`: Muestra la diferencia (es decir, el parche) introducida en cada commit.
+- `git log --stat`: Proporciona algunas estadísticas abreviadas para cada commit.
+- `git log --oneline`: Da una salida más compacta, mostrando cada commit como una sola línea.
+- `git log --graph`: Visualiza la historia de branches y merges en un diseño de gráfico ASCII.
+- `git log --author="Juan Silva`": Filtra los commits para mostrar solo los realizados por una persona
+específica (en este caso, "Juan Silva").  
+  
+Probemos con el git log --graph: 
+![](img/5.2.png)  
+
+En este caso nos sale una líena recta es porque al tener una sola rama main el historial de commit se ve linealmente, pero si hubieran mas de una rama, problablemente implicaría diferentes avances (en cada rama) y mergeos, y en ese caso se vería algo asi:  
+![](img/5.3.png)  
+  
+También podemos mejorar la perpectiva de la siguiente manera:  
+`$ git log --graph --pretty=format:'%x09 %h %ar ("%an") %s'`   
+![](img/5.4.png)  
+  
+Básicamente estamos añadiendo una personalizacion:  
+- `%x09`: Representa una tabulación al princio.  
+
+- `%h`: Muestra el hash abreviado del ID del commit.  
+
+- `%ar`: Muestra el tiempo que ha pasado desde que se hizo el commit.  
+
+- `("%an"):` Muestra el nombre del autor del commit entre comillas y entre paretesis.  
+
+- `%s`: Muestra el mensaje del commit.  
+  
+
