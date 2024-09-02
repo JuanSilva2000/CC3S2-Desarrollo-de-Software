@@ -108,30 +108,47 @@ Con el siguiente comando podremos cambiar de rama:
 ### Ejemplos adicionales:  
 ### Crea una branch desde una branch específica:  
 
-- Creamos una rama develop  
+- Creamos una rama develop   
+
+![](img/6.5.png) 
   
 - Cambia a la rama develop si no estás en ella:  
+![](img/6.6.png)
   
 - Crea una nueva rama 'feature/login' desde 'develop':  
+![](img/6.7.png)   
+Verificamos con un git branch  
+
+![](img/6.7.2.png)
   
 - Cambia a la nueva rama 'feature/login':  
+![](img/6.8.png)
   
 ### Crear una branch desde un commit específico:  
 
 - Verifica el historial de commits para identificar el commit específico  
+![](img/6.9.png)
 
-- Crear una nueva rama 'hotfix/bugfix' basada en el commit 'abc1234'  
-
+- Crear una nueva rama 'hotfix/bugfix' basada en el commit 'e2714f9'  
+![](img/6.10.png)
+  
+![](img/6.10.1.png)
 - Cambia a la nueva rama 'hotfix/bugfix  
+![](img/6.11.png)
+  
+![](img/6.12.png)
 
 Las versiones recientes de Git también ofrecen el comando git switch, que proporciona una forma más intuitiva de cambiar branches:  
 
-- Cambiar a la branch 'feature/new-feature':  
+- Cambiar a la branch 'feature/login':  
+![](img/6.13.png)
   
 A veces, puede resultar eficiente crear una nueva branch y cambiar a ella inmediatamente. Git proporciona un comando abreviado para esto, que combina la funcionalidad de `git branch` y `git checkout` o `git switch`. Para crear una nueva branch y cambiar a ella en un solo paso, puedes usar el comando `git checkout -b`:  
   
 - Crear y cambiar a una nueva branch  
   
+![](img/6.14.png)  
+
 Eso es equivalente a ejecutar los siguientes comandos de manera seguida:  
 ```  
   $ git branch feature/another-new-feature
@@ -141,6 +158,7 @@ Eso es equivalente a ejecutar los siguientes comandos de manera seguida:
 En las versiones recientes de Git, puedes lograr lo mismo con git switch usando la opción -c:  
 
 - Crear y cambiar a una nueva branch:   
+![](img/6.15.png)
   
 ## 8. git merge [Branch Name] : Fusionando branches  
  
