@@ -161,4 +161,24 @@ En las versiones recientes de Git, puedes lograr lo mismo con git switch usando 
 ![](img/6.15.png)
   
 ## 8. git merge [Branch Name] : Fusionando branches  
- 
+Para efectuar un merge primero nos situamos en una rama diferente a la del main y hacemos algún cambio, en nuestro caso hacemos el cambio en el archivo main.py:  
+![](img/new-code-branch.png)  
+Vemos que en efecto el estado del archivo cambió a modificado  
+
+![](img/git%20status-new%20modification.png)     
+
+Entonces procedemos a rastrear dicho cambio y commitearlo:  
+
+![](img/get%20ready%20commit%20to%20merge.png)   
+  
+Regresamos a la rama main que es la rama que recibirá los cambios y procedemos a realizar un merge con la ramma que queremos fusionar, esto lo logramos haciendo un `git merge feature/another-new-feature-2` y como vemos en el mensaje de la imágen de abajo, el mergeo se realiza:  
+
+![](img/git%20merge%20hecho.png)  
+  
+Cuando realizamos el merge nos pedirá que escribamos un mensaje que explique la necesidad de hacer dicha fusion
+![](img/mensaje%20del%20por%20qué%20merge.png)  
+
+## 9. git branch -d : Eliminando una Branch  
+El comando `git branch -d [branch name]` sirve par  eliminar una rama, el flag -d indica delete y elimina alguna rama si esta ya ha sido fusionada, en cambio si ponermos `git branch -D [branch name]` la eliminará sin importar que no haya sido fucionada  
+  
+![](img/delete%20rama.png)
