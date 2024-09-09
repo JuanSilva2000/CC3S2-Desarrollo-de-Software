@@ -91,7 +91,7 @@ En nuestro caso solo hay una rama (la main)
   
 Creamos una nueva rama con:  
 ```
-$ git branch featyre/new-feature
+$ git branch feature/new-feature
 ``` 
 
 ![](img/6.2.png)  
