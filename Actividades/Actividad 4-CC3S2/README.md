@@ -78,4 +78,116 @@ Recuerda: un merge squash sólo prepara los cambios pero no los guarda de forma 
 ![](img/squash-7.png)  
   
 El resultado:  
-![](img/squash-8.png)
+![](img/squash-8.png)  
+   
+# Resolver conflictos en una fusión non-fast-forward  
+### 1. Inicializamos nuestro repositorio
+![](img/NFF-C-01.png)  
+  
+### 2. Crea un archivo index.html y realizamos un commit en main  
+En este caso el commit se llama "commit inicial del index en main"
+![](img/NFF-C-02.png)  
+  
+### 3. Creamos una rama feature-update
+![](img/NFF-C-03.png)  
+  
+### 4. Editamos el index y realizamos un commit  
+El commit en esta rama se llamará "Actualiza ..."  
+![](img/NFF-C-04.png)  
+  
+### 5. Volvemos a la rama main y realizamos otro commit  
+Para ello editaremos una vez mas el archivo index y añadieremos un foorter y lo comitearemos con el mensaje "...index.html"
+![](img/NFF-C-05.png)  
+  
+Entonces lo que de momento tenemos es como se muestra en la gráfica y se busca hacer una fusion no-fast-forward como indica la flecha creando asi el commit de fusion (circulo de F)  
+
+![](img/NFF-C-05.1.png)    
+
+  
+### 6. Fusiona la rama feature-update con --no-ff  
+Notamos que hay un conflicto en la fusion, especificamente en el archivo index.html
+![](img/NFF-C-06.png)   
+Al abrir nuestro editor de código, notaremos donde específicamente está el conflicto, resulta que en la rama main, la etiqueda footer está en la linea 2, pero en la rama feature-update, en la linea 2 no existe dicho footer, si no la etiqueda \<p> y git no sabe cómo ordenar eso al momento de fusionar, entonces una opción para solucionar ese conflicto es arreglandolo manualmente
+![](img/NFF-C-07.png)
+
+Luego de arreglarlo editandolo manualmente, debería quedar algo asi:
+![](img/NFF-C-09.png)  
+  
+### 7. Agregar el archivo corregido y completa la fusión  
+Como ya tenemos una versión definida de nuestro index-html, entonces procedemos a agregarlo al staging y comitearlo
+![](img/NFF-C-10.png)  
+
+Gaficamente se veria tal que asi
+![](img/NFF-C-11.png)
+ 
+O asi:  
+
+![](img/NFF-C-11.1.png)  
+  
+### Preguntas:  
+### 1) ¿Qué pasos adicionales tuviste que tomar para resolver el conflicto?  
+Tuve que editar manualmente el archivo donde existia el conflicto, para ello abrimos nuestro editor de código, visual studio code, y ordenamos todo el index.html
+
+### 2) ¿Qué estrategias podrías emplear para evistar conflictos en futuros desarrollos colaborativos?  
+Debéria haber una mejor repartición de responsabilidades entre los desarrolladores, de tal forma que dos desarrolladores no estén editando el mismo archivo cada uno desde dos ramas distintas como sucedió en esta activida donde el archivo index.html se editó desde dos ramas, main y feature-update, y si por algún X motivo se ven obligados a hacerlo, entonces sería bueno una constante comunicación para tener todo milimétricamente calculado y se evite conflicto al momento de fusionar
+  
+## COMPARAR LOS HISTORIALES CON GIT LOG DESPUÉS DE DIFERENTES FUSIONES  
+### 1. Creamos nuestro directorio de trabajo
+![](img/log-01.png)  
+  
+### 2. Realizamos el primer commir en la rama main  
+
+![](img/log-02.png)  
+  
+### 3. Creamos una rama feature-1 y añadimos un commit en esta rama
+![](img/log-03.png)
+![](img/log-04.png)  
+  
+### 4. Creamos otra rama feature-2 y añadimos un commit en esta rama
+![](img/log-05.png)
+![](img/log-06.png)  
+  
+### 5. Merge ff entre feature-1 y main
+![](img/log-07.png)    
+
+ Vemos que el commit de feature-1 se mueve a la rama main y se mantiene la linealidad   
+   
+![](img/ff-log.png)
+
+### 6. Merge no-ff entre feature-2 y main
+![](img/log-08.png)  
+Notamos que hay un conflicto y es porque en una misma linea en diferentes ramas hay diferente contenido (Caracteristica 1 agregada y Caracteristica 2 agregada)  
+
+![](img/log-09.png)  
+  
+Lo resolvemos manualmente en el editor de código  
+
+![](img/log-10.png)  
+  
+Luego lo añadimos al staging y comiteamos dicha fusion
+![](img/log-11.png)  
+    
+Notamos que se creo un nuevo commit de fusion (merge feature-2 main), es decir hay una bifurcación como se muestra en el gráfico
+
+![](img/no-ff-log.png)  
+  
+### 7.Creamos una tercera rama feature-3 y añadimos 2 commits
+![](img/log-12.png)
+![](img/log-13.png)
+![](img/log-14.png)  
+  
+### 8. Merge squash entre main y feature-3  
+Hacemos un mergeo de tipo squash con
+![](img/log-15.png)  
+    
+Notamos que todos los commits de la rama feature-3 se juntan en un solo commit (Agregarcaracteristica 3 en un commit) en el main, manteniendo un historial limipio como se muestra en la imágen
+
+![](img/squash-log.png)  
+  
+## Prregunta  
+### 1. ¿Qué métodos prefieres en diferentes escenarios y por qué?  
+*Fast-Forward*: Yo lo usaria cuando las correciones a integrar son pequeñas porque con el ff se mantiene la simplicidad y/o linealidad por lo tanto el historial se mantiene lineal sin bifurcaciones.  
+  
+*No-Fast-Forward*: Este tipo de merge lo usaria cuando hay un equipo con varios contribuyentes, y los aportes que estos hagan fusiones de características grandes, asi se podrá saber en qué momento se intergró una nueva caracteristica con el git de fusion, facilitando la claridad..
+  
+*Squash*: Este merge lo usaría cuando en una rama los commits son pequeños y no hay tanta preocupación de mantener los commits individuales, entonces todos esos pequeños commits los aplastamos en uno para el mergeo.
