@@ -1,6 +1,8 @@
 Este es el contenido inicial del proyecto
 Este es un cambio en la feature-branch
 Este es 2do cambio en feature-branch
+<<<<<<< HEAD
 Este es 2do cambio en main
-
-Linea error a eliminar
+=======
+Este es un 3er cambio en feature-branch
+>>>>>>> feature-branch
