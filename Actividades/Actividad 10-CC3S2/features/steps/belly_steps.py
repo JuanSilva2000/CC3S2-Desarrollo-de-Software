@@ -1,4 +1,5 @@
 from behave import given, when, then
+import random
 import re
 
 numeros_espaniol = {
@@ -22,7 +23,7 @@ numeros_ingles = {
 # Función para convertir palabras numéricas a números
 def convertir_palabra_a_numero(palabra):
     try:
-        return int(palabra)
+        return float(palabra)
     except ValueError:
         if palabra in numeros_espaniol:  
             return numeros_espaniol.get(palabra.lower(), 0)  
@@ -30,7 +31,7 @@ def convertir_palabra_a_numero(palabra):
             return numeros_ingles.get(palabra.lower(),0)
     
 @given('que he comido {cukes}')
-def step_given_eaten_cukes(context, cukes):
+def step_given_eaten_cukes(context, cukes):     
     cukes = cukes.replace(" pepinos","")
     cukes = cukes.replace(" de","")
     cukes = cukes.replace('"','').lower()
@@ -79,6 +80,12 @@ def step_when_wait_time_description(context, time_description):
             raise ValueError(f"No se pudo interpretar la descripción del tiempo: {time_description}")
 
     context.belly.esperar(total_time_in_hours)
+  
+@when('se espera un tiempo aleatorio entre {min_time:d} y {max_time:d} horas')
+def step_when_wait_random_time(context, min_time, max_time):
+    tiempo_aleatorio = random.uniform(min_time, max_time)
+    print(f"Esperando un tiempo aleatorio de {tiempo_aleatorio:.2f} horas.")
+    context.belly.esperar(tiempo_aleatorio)
 
 @then('mi estómago debería gruñir')
 def step_then_belly_should_growl(context):
@@ -93,4 +100,5 @@ def step_then_invalid_cucumber_amount(context):
     try:
         assert context.belly.pepinos_comidos < 100, "Cantidad de pepinos no válida"
     except AssertionError as e:
-        print(str(e))
+        print(str(e))  
+          

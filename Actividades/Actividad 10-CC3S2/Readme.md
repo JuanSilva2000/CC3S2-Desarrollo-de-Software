@@ -158,4 +158,74 @@ def step_when_wait_time_description(context, time_description):
   
 Resultado: 
 
-![](img/13.png)
+![](img/13.png)  
+  
+## 7. Manejo de unidades de tiempo aleatorias  
+Podemos agregar lógica para manejar la entrada de tiempos de espera aleatorios, lo que permitirá al sistema trabajar con valores de tiempo no especificados, basándose en un rango.  
+  
+Es decir que pueda aceptar escenarios como estos:  
+  
+```gherkin       
+    Escenario: Comer pepinos y esperar un tiempo aleatorio
+        Dado que he comido 25 pepinos
+        Cuando se espera un tiempo aleatorio entre 1 y 3 horas
+        Entonces mi estómago debería gruñir
+```  
+  
+para ello añadimos la siguieente función en `belly_steps.py`  
+  
+![](img/14.png)  
+  
+  
+Al poner esto deberpia pasar tosos los escenarios sin fallas  
+
+![](img/15.png)  
+
+
+## 8. Uso de unidades fraccionarias de pepinos  
+  
+Podemos agregar soporte para manejar fracciones de pepinos, lo cual sería útil para escenarios donde una persona no come un número entero de pepinos.  
+  
+```gherkin  
+    Escenario: Comer medio pepino y esperar
+        Dado que he comido 0.5 pepinos
+        Cuando espero 2 horas
+        Entonces mi estómago no debería gruñir
+```    
+  
+Para ello simplementa hacemos una modificación en la función `convertir_palabra_a_numero()` y es parseando a float el string que indica la cantidad de pepinos  
+  
+![](img/16.png)
+  
+Con esto debería pasar todos los escenarios incluyendo el último incluido  
+  
+![](img/17.png)  
+  
+## 9. Validaciones adicionales en belly.py  
+  
+Agregar reglas de negocio más detalladas para manejar excepciones o validaciones adicionales, por ejemplo, si se intenta comer una cantidad negativa de pepinos o si el tiempo de espera es menor a 0.  
+  
+![](img/18.png)
+  
+   
+Añadimos un nuevo escenario:  
+```gherkin  
+      Escenario: Comer una cantidad negativa de pepinos
+        Dado que he comido -5 pepinos
+        Entonces debería ocurrir un error de cantidad negativa
+```  
+  
+### Falta completar
+
+## 10. Manejo de multitud de pepinos y tiempos  
+#### Nuevo escenario en belly.feature  
+```gherkin
+Escenario: Comer grandes cantidades de pepinos y esperar mucho tiempo
+    Dado que he comido 1000 pepinos
+    Cuando espero 10 horas
+    Entonces mi estómago debería gruñir
+```  
+
+Como tenemos el belly_steps programado, no debería haber problema con la añadidura de ese escenario.  
+  
+![](img/19.png)
