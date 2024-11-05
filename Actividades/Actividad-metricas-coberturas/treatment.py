@@ -1,25 +1,35 @@
+import re
+
 class Treatment:
     def __init__(self, treatment_id, patient, doctor, description, date):
         self.treatment_id = treatment_id
         self.patient = patient
         self.doctor = doctor
-        self.description = description
-        self.date = date
+        self.description = self.validate_description(description)
+        self.date = self.validate_date(date)
 
-    def record_treatment(self, description, date):
-        if not description:
-            raise ValueError("La descripción del tratamiento no puede ser vacía.")
-        self.description = description
-        self.date = date
-
-    def update_treatment(self, description):
-        self.description = description
-
+    def validate_description(description):
+        if description == "":
+            raise ValueError("La descripcion no debe ser vacio")
+        return description
+    
+    def validate_date(date):
+        if not re.match(r'^\d{2}-\d{2}-\d{4}$',date):
+            raise ValueError("Fecha no valida")
+        return date
+    
+    def record_treatment(self,description, date):
+        self.description = self.validate_description(description)
+        self.date = self.validate_date(date)
+    
+    def update_treatment(self,description):
+        self.description = self.validate_description(description)
+        
     def summary(self):
         return {
-            "treatment_id": self.treatment_id,
-            "patient": self.patient.summary(),
-            "doctor": self.doctor.summary(),
-            "description": self.description,
-            "date": self.date,
+            "ID_TRATAMINETO: ": self.treatment_id,
+            "PACIENTE: ": self.patient,
+            "DOCTOR: ": self.doctor,
+            "DECRIPCION: ": self.description,
+            "FECHA: " : self.date
         }
