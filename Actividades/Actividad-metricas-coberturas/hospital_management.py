@@ -4,7 +4,7 @@ from patient import Patient
 from treatment import Treatment
 
 class HospitalManagement:
-    def _init_(self):
+    def __init__(self):
         self.patients = {}
         self.doctors = {}
         self.appointments = {}
@@ -41,7 +41,6 @@ class HospitalManagement:
             if doctor_id not in self.doctors:
                 raise ValueError("El doctor no existe")
             self.doctors[doctor_id].add_available_slot(slot)
-            self.doctors[doctor_id].remove_available_slot(slot)
             
         elif action == "remove_slot":
             if doctor_id not in self.doctors:

@@ -1,11 +1,15 @@
 import pytest
+from hospital_management import HospitalManagement
 from patient import Patient
-# import patient
+from doctor import Doctor
+from appointment import Appointment
+from treatment import Treatment
 
-@pytest.fixture(scope="function",autouse=True)
-def setup():
-    patient = Patient("1", "Juan Silva", "16-02-2000")
-    
-def test_patient_creation():
-    assert patient.patient_id == "1"
-    assert patient.name == "Juan Silva"
+@pytest.fixture
+def hospital_management():
+    return HospitalManagement()
+
+def test_manage_patients_create(hospital_management):
+    #aqui quiero probar la creacion de un paciente
+    hospital_management.manage_patients("create", "001", "Juan Silva", "16-02-2000")
+    assert "P001" in hospital_management.patients
