@@ -8,14 +8,14 @@ class Treatment:
         self.description = self.validate_description(description)
         self.date = self.validate_date(date)
 
-    def validate_description(description):
+    def validate_description(self,description):
         if description == "":
             raise ValueError("La descripcion no debe ser vacio")
         return description
     
-    def validate_date(date):
+    def validate_date(self,date):
         if not re.match(r'^\d{2}-\d{2}-\d{4}$',date):
-            raise ValueError("Fecha no valida")
+            raise ValueError("Fecha no validaa")
         return date
     
     def record_treatment(self,description, date):

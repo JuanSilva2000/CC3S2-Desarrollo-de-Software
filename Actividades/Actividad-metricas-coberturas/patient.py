@@ -7,16 +7,16 @@ class Patient:
         self.dob = self.validate_dob(dob)
         self.medical_history = []
 
-    def validate_name(name):
+    def validate_name(self,name):
         if not re.match(r'^[A-Za-z\s]+$',name):
             raise ValueError("Nombre no valido")
-        
         return name
     
-    def validate_dob(dob):
-        if not re.match(r'^\d{2}-\d{2}-\d{4}$',dob):
+    def validate_dob(self,dob):
+        if not re.match(r'^\d{2}-\d{2}-\d{4}$',dob): #16-02-2000
             raise ValueError("Fecha no valida")
-        
+        return dob
+    
     def update_info(self,name,dob):
         self.name = self.validate_name(name)
         self.dob = self.validate_dob(dob)

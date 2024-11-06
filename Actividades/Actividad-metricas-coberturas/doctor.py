@@ -7,13 +7,13 @@ class Doctor:
         self.specialization = self.validate_name_or_specialization(specialization)
         self.available_slots = [self.validate_slot(slot) for slot in available_slots]
 
-    def validate_name_or_specialization(value):
+    def validate_name_or_specialization(self,value):
         if not re.match(r'^[A-Za-z\s]+$', value):
             raise ValueError("Nombre no valido")
         
         return value
 
-    def validate_slot(slot):
+    def validate_slot(self,slot):
         if not re.match(r'^\d{2}-\d{2}-\d{4}, \d{2}:\d{2}$', slot):
             raise ValueError("Slot no valido")
         

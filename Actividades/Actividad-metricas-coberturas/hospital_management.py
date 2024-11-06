@@ -10,7 +10,7 @@ class HospitalManagement:
         self.appointments = {}
         self.treatments = {}
 
-    def manage_patients(self, action, patient_id, name, dob):
+    def manage_patients(self, action, patient_id, name=None, dob=None):
         if action == "create":
             if patient_id in self.patients:
                 raise ValueError("El paciente ya existe")
@@ -30,7 +30,7 @@ class HospitalManagement:
         else:
             raise ValueError("Accion invalida")
 
-    def manage_doctors(self, action, doctor_id, name ,specialization, slot):
+    def manage_doctors(self, action, doctor_id, name=None ,specialization=None, slot=None):
         if action == "create":
             if doctor_id in self.doctors:
                 raise ValueError("El doctor ya existe")
@@ -66,7 +66,7 @@ class HospitalManagement:
             if not patient or not doctor:
                 raise ValueError("Paciente o doctor no encontrado")
             
-            appointment = Appointment(appointment_id, patient, doctor, datetime)
+            appointment = Appointment(appointment_id, patient, doctor, datetime,"scheduled")
             appointment.schedule()
             self.appointments[appointment_id] = appointment
             
