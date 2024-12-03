@@ -74,6 +74,8 @@ def test_manage_treatment_update(hospital_management_T):
     hospital_management_T.manage_treatments("update","T001","P001","D001","Se curó la Arritmia","11-03-2025")
     assert hospital_management_T.treatments["T001"].description == "Se curó la Arritmia"
 
+##Casos invalidos
+
 def test_invalid_patient_name():
     with pytest.raises(ValueError):
         Patient("P002", "?", "16-02-2000") 

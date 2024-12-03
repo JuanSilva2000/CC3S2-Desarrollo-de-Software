@@ -102,4 +102,3 @@ class HospitalManagement:
         else:
             raise ValueError("Accion invalida")
 
-        

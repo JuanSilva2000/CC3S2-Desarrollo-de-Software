@@ -5,7 +5,7 @@ class Patient:
         self.patient_id = patient_id
         self.name = self.validate_name(name)
         self.dob = self.validate_dob(dob)
-        self.medical_history = []
+        self.medical_history = [] 
 
     def validate_name(self,name):
         if not re.match(r'^[A-Za-z\s]+$',name):

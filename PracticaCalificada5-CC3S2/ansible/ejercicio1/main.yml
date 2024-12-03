@@ -1,0 +1,25 @@
+- name: Actualizar paquetes del sistema
+  apt:
+    update_cache: yes
+    upgrade: dist
+    state: present
+
+- name: Configurar zona horaria  
+  command: timedatectl set-timezone UTC
+
+- name: Crear grupo llamado admin
+  group:
+    name: admin
+    state: present
+
+- name: Crear usuario devuser
+  user:
+    name: devuser
+    shell: /bin/bash
+    password: "{{ '123456' | password_hash('sha512') }}"
+
+- name: Asignar 'devuser' al grupo 'admin'
+  user:
+    name: devuser
+    groups: admin
+    append: yes

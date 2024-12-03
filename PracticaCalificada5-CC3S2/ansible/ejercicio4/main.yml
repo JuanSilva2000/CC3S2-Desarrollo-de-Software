@@ -1,0 +1,28 @@
+- name: Instalar Prometheus y Node Exporter
+  apt:
+    name:
+      - prometheus
+      - prometheus-node-exporter
+    state: present
+    update_cache: yes
+
+- name: Configurar Prometheus para recopilar métricas
+  copy:
+    src: ../../templates/prometheus.yml.j2
+    dest: /etc/prometheus/prometheus.yml
+    mode: '0644'
+  notify:
+    - Reiniciar Prometheus
+
+- name: Instalar Grafana
+  apt:
+    name: grafana
+    state: present
+    update_cache: yes
+
+- name: Habilitar e iniciar el servicio Grafana
+  service:
+    name: grafana-server
+    state: started
+    enabled: yes
+

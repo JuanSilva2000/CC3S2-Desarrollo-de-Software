@@ -1,0 +1,32 @@
+- name: Instalar Nginx
+  apt:
+    name: nginx
+    state: present
+    update_cache: yes
+
+- name: Crear directorio para los certificados SSL
+  file:
+    path: /etc/nginx/ssl
+    state: directory
+    mode: '0755'
+
+- name: Generar certificado SSL autofirmado
+  command: openssl req -new -newkey rsa:2048 -days 365 -nodes -x509 -keyout /etc/nginx/ssl/nginx.key -out /etc/nginx/ssl/nginx.crt
+  args:
+    creates: /etc/nginx/ssl/nginx.crt
+
+- name: Configurar Nginx para usar SSL con plantilla
+  template:
+    src: ../../templates/congif_plantilla.j2
+    dest: /etc/nginx/sites-available/default
+  notify:
+    - Reiniciar Nginx
+
+- name: Habilitar y configurar UFW para permtir trafico en los puertos necesarios
+  ufw:
+    rule: allow
+    port: "{{ item }}"
+    proto: tcp
+  with_items:
+    - 80
+    - 443

@@ -14,7 +14,7 @@ class Doctor:
         return value
 
     def validate_slot(self,slot):
-        if not re.match(r'^\d{2}-\d{2}-\d{4}, \d{2}:\d{2}$', slot):
+        if not re.match(r'^\d{2}-\d{2}-\d{4}, \d{2}:\d{2}$', slot): #10-02-2000, 11:00
             raise ValueError("Slot no valido")
         
         return slot

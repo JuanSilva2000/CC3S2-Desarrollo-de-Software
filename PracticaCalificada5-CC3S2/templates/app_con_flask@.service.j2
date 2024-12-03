@@ -1,0 +1,11 @@
+[Unit]
+Description=Esta es mi app
+After=network.target
+
+[Service]
+User=www-data
+WorkingDirectory=/var/www/app_con_flask
+ExecStart=/usr/bin/gunicorn --workers 3 --bind 0.0.0.0:%i app:app
+
+[Install]
+WantedBy=multi-user.target

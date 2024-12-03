@@ -7,7 +7,7 @@ class Appointment:
         self.doctor = doctor
         self.datetime = self.validate_datetime(datetime)
         self.status = "scheduled"
-
+   
     def validate_datetime(self,datetime):
         if not re.match(r'^\d{2}-\d{2}-\d{4}, \d{2}:\d{2}$',datetime):
             raise ValueError("La cita debe tener el formato DD-MM-AAAA, HH:MM")
